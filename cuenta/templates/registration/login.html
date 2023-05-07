@@ -1,0 +1,95 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>SMART PLANNING</title>
+</head>
+<body>
+
+    <main>
+
+            <div class="pagina-inicio">
+
+                <div class="fondo-inicio">
+
+                        <img src = "{%static 'img/smart_planning.png' %}" alt = "Smart_Planning">
+                        <h1>Ingresa tus datos para iniciar sesion</h1>
+                        <form method="POST"  class="formulario">
+                            {%csrf_token%}
+                            <fieldset>
+
+                               <div class="contenedor-campos">
+                               <!--
+                                    <div class="campo">
+                                        <label>Usuario</label>
+                                        <input class="input-text" type="text" name="username" placeholder="Tu usuario">
+                                    </div>
+                                    <div class="contenedor-campos">
+                                        <div class="campo">
+                                            <label>Password</label>
+                                            <input class="input-text" type="password" name="password" placeholder="Tu password">
+                                        </div>
+                                    </div>
+                                -->
+
+                                {{ form | crispy }}
+                                    {%if x == 1 %}
+                                        <br><br>
+                                        <div class="alert alert-success">
+                                            <h3>{{message}}</h3>
+                                        </div>
+                                    {%endif%}
+                                    <div class="botones" >
+                                        <button class="boton"> LOGIN </button>
+
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
+                        </form>
+
+                </div>
+
+                <div class="datos">
+                    <div class="contenedor sombra">
+                        <h1>¿No tienes cuenta?</h1>
+                        <h2>Registrate y descubre todo lo que SMART PLANNING tiene para ti.</h2>
+
+
+                                <div class="contenedor-campos">
+                                        <div class="registro">
+                                            <a class="boton" href="{% url 'register' %}">Crear Cuenta</a>
+                                       </div>
+                                    <br> <br>
+                                </div>
+
+
+                    </div> <!-- cierre contenedor sombra -->
+                </div>
+
+            </div>
+
+
+    </main>
+</body>
+</html>

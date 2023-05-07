@@ -1,0 +1,316 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Requerimientos no Funcionales</title>
+</head>
+{%     block content     %}
+<body>
+<div class="layout_principal">
+        <div class = "div_nav"></div> <!--Fin navegacion -->
+
+                <div class="contenedor-centrado datos  box_y_conteiner ">
+
+                    <div class="container-sm">
+                        <h1>¡Registra tus requerimientos NO funcionales!</h1>
+
+                        {%if requerimientos|length == 0 %}
+
+                        <form action="" method="POST">
+                            <fieldset>
+                                    <p style="font-size: 17" class="mt-5">A continuación se presentan como sugerencia algunos de los requerimientos no funcionales más utilizados para el desarrollo de sistemas de software:</p>
+                                    <h2 class="mt-5"> Gestión de los Requerimientos No Funcionales que Caracterizan la Ejecución o Funcionamiento Global del Sistema de Software</h2>
+                                    {%csrf_token%}
+                                   <table class="table table-striped mt-4">
+                                          <thead>
+                                            <tr>
+                                              <th scope="row">Requerimiento no funcional</th>
+                                              <th>Descripción</th>
+                                              <th>Seleccionar</th>
+                                            </tr>
+                                          </thead>
+                                            <tbody>
+
+                                            <tr>
+                                              <td scope="row">Confiabilidad</td>
+                                              <td>Debe existir una baja probabilidad de que el sistema presente fallas. </td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="input-text" type="hidden"  name="artefacto" value="formulario">
+                                                      <input class="form-check-input" type="checkbox" value="Confiabilidad" id="Confiabilidad" name="requerimiento">
+                                                      <label class="form-check-label" for="Confiabilidad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Robustez</td>
+                                              <td>El sistema debe responder adecuadamente cuando se presenten situaciones fuera de lo común.</td>
+
+                                                <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Robustez" id="Robustez" name="requerimiento">
+                                                      <label class="form-check-label" for="Robustez">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Seguridad</td>
+                                              <td>Que la información en el sistema esté protegida contra atacantes que pudieran causar daño.</td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Seguridad" id="Seguridad" name="requerimiento">
+                                                      <label class="form-check-label" for="Seguridad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Portabilidad</td>
+                                              <td>Que el sistema se pueda instalar con relativa facilidad en diferentes ambientes de hardware.</td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Portabilidad" id="Portabilidad" name="requerimiento">
+                                                      <label class="form-check-label" for="Portabilidad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Eficiencia o Rendimiento</td>
+                                              <td>Que se consiga hacer la mayor cantidad de trabajo (calcular resultados, enviar mensajes, desplegar interfaces de usuario, etc.) con un uso mínimo de recursos (memoria, tiempo de procesamiento, ancho de banda, etc.).</td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Eficiencia o Rendimiento" id="EficienciaRendimiento" name="requerimiento">
+                                                      <label class="form-check-label" for="EficienciaRendimiento">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+
+                                            </tbody>
+                                    </table>
+                                    <br> <br>
+                                    <br>
+                                    <h2 class="mt-5">Gestión de los Requerimientos No Funcionales que Caracterizan al Sistema de Software como Producto</h2>
+                                   <table class="table table-striped mt-4">
+                                          <thead>
+                                            <tr>
+                                              <th scope="row">Requerimiento no funcional</th>
+                                              <th>Descripción</th>
+                                              <th>Seleccionar</th>
+                                            </tr>
+                                          </thead>
+                                            <tbody>
+
+                                            <tr>
+                                              <td scope="row">Reusabilidad</td>
+                                              <td>Que el sistema o algunas de sus partes se puedan utilizar en la construcción de otros sistemas.</td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Reusabilidad" id="Reusabilidad" name="requerimiento">
+                                                      <label class="form-check-label" for="Reusabilidad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Flexibilidad</td>
+                                              <td>Que el sistema se pueda adaptar a otras circunstancias agregando o modificando módulos./td>
+
+                                                <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Flexibilidad" id="Flexibilidad" name="requerimiento">
+                                                      <label class="form-check-label" for="Flexibilidad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Escalabilidad</td>
+                                              <td>Se refiere a la capacidad del sistema de software de aumentar su rendimiento en la medida en que nuevos recursos de hardware son incorporados. </td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Escalabilidad" id="Escalabilidad" name="requerimiento">
+                                                      <label class="form-check-label" for="Escalabilidad">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td scope="row">Facilidad de pruebas</td>
+                                              <td>Se refiere al nivel de complejidad de las pruebas efectuadas para asegurar la calidad del sistema de software.    </td>
+                                              <td>
+                                                  <div class="form-check">
+                                                      <input class="form-check-input" type="checkbox" value="Facilidad de pruebas" id="Facilidadpruebas" name="requerimiento">
+                                                      <label class="form-check-label" for="Facilidadpruebas">
+                                                        Agregar
+                                                      </label>
+                                                  </div>
+                                              </td>
+                                            </tr>
+
+                                            </tbody>
+                                    </table>
+
+                                    <div class="botones">
+                                        <button class ="boton">Agregar</button>
+                                    </div>
+                            </fieldset>
+                        </form>
+
+                        {%endif%}
+
+
+                    </div>
+
+                    <div class="contenedor sombra">
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+                                <h3>Agrega los requerimientos no funcionales de tu proyecto uno a la vez.</h3>
+                                <h3> Cuando no tengas más requerimientos por agregar pulsa finalizar para continuar</h3>
+
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Requerimiento:</label>
+                                        <input class="input-text" type="text"  name="requerimiento_p" placeholder="Requerimiento">
+                                        <input class="input-text" type="hidden"  name="artefacto" value="formulario">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Descripción:</label>
+                                        <textarea class="input-text" type="text_area"  name="descripcion" placeholder="Agregar una descripción del requerimiento" rows="5" maxlength="500"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="botones">
+                                    <button class ="boton">Agregar</button>
+                                    <a class="boton" href="{% url 'Aspectos' %}">Finalizar</a>
+
+                                </div>
+
+
+                                {%if x == 1 %}
+                                    <br><br>
+                                    <div class="alert alert-success">
+                                        <h3>{{message}}</h3>
+                                    </div>
+                                {%endif%}
+
+
+                            </fieldset>
+
+                        </form>
+
+                    </div> <!-- fin contenedor  datos-->
+
+
+
+        <div class="container">
+            <h1 style="margin-top: 80px; border-top: 1px solid; padding-top: 20px"> Requerimientos NO Funcionales</h1>
+        <div class=" lista">
+        {%if requerimientos|length == 0 %}
+        <h2 style="text-align:center">No hay requerimientos para el proyecto</h2>
+        {%else%}
+        <table class="table table-hover">
+        <thead>
+        <tr>
+         <th class="col-3" scope="col">Requerimiento</th>
+         <th class="col-7" scope="col">Descripción</th>
+         <th scope="col-2"></th>
+        </tr>
+        </thead>
+        <tbody>
+
+               {% for req in requerimientos %}
+
+                       <tr>
+
+                         <td class="col-3">{{ req.requerimiento }}</td>
+                         <td class="col-7">{{ req.descripcion }}</td>
+                         <td class="col-2">
+
+                             <a href="{% url 'eliminar_req_no_funcional' req.id %}" class="float-end btn btn-lg btn-danger ml-2 btnEliminar">Eliminar</a>
+                             <button id="editar-no-funcional" onclick=" abrir_modal_edicion_no_funcional('{% url 'editar_no_funcional' req.id %}') "  class="btn btn-lg btn-primary float-end">Editar</button>
+                             <div class="modal fade" id="edicion_no_funcional" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> </div>
+
+                         </td>
+                       </tr>
+
+
+               {% endfor %}
+
+        </tbody>
+        </table>
+        {%endif%}
+           </div>
+
+        </div>
+
+<!--
+                <div class=" sombra">
+
+                    <h1>Requerimientos NO Funcionales</h1>
+                        <div class="box_list_container">
+                            {%if requerimientos|length == 0 %}
+                                <h2>No hay requerimientos para el proyecto</h2>
+                            {%else%}
+                                {% for req in requerimientos %}
+                                    <div class="item  box cyan">
+                                        <h2>{{ req.requerimiento }}</h2>
+                                        <p>{{ req.descripcion }}</p>
+                                    </div><!-fin cards_task->
+                                {% endfor %}
+                            {%endif%}
+                        </div>
+                </div>
+-->
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src=" {% static 'js/scripts.js'%} "></script>
+
+</body> <!--Fin layout principal -->
+{% endblock %}
+</html>

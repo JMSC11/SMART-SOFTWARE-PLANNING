@@ -1,0 +1,128 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Gestion Proyectos</title>
+</head>
+{%     block content     %}
+<body class = "layout_principal">
+
+
+    <div class = "div_nav">
+    </div> <!--Fin navegacion -->
+
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-10">
+                <h1 class="pt-5 ">Lista de Proyectos</h1>
+                <div class="table-responsive-sm mt-5">
+                    <table class="table table-hover table">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Propietario</th>
+                          <th scope="col">Proyecto</th>
+                          <th scope="col"></th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for proyecto in proyectos %}
+                            <tr>
+                              <th scope="col">{{ proyecto.id }} </th>
+                              <td>{{request.user.username}}</td>
+                              <td>{{ proyecto.nombre }}</td>
+                              <td>
+                                  <a href="{% url 'eliminar_proyecto' proyecto.id %}" class="ml-5 float-end btn btn-lg btn-danger btnEliminar">Eliminar</a>
+                                  <a href="{% url 'detalles_proyecto' proyecto.id %}"  class="float-end btn btn-lg btn-lg btn-primary">Ver Detalles</a>
+                              </td>
+                            </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                </div> <!-- fin table-responsive -->
+
+                <div class="item add">
+                    <a class="button", href= "{% url 'agregar_proyectos' %}">
+                        <img src = "{%static 'img/add.png' %}" alt="add" width="50px">
+                    </a>
+
+                    <h3>Agregar Proyecto</h3>
+                </div>
+
+            </div>
+        </div>
+    </div> <!-- fin container -->
+
+<!--
+   <div class = "layout">
+        <div class = "box_list_container">
+
+            {% for proyecto in proyectos %}
+
+            <form method="POST">
+            {%csrf_token%}
+            <fieldset>
+                <div class="item  box orange">
+                <h2>{{ proyecto.nombre }}</h2>
+                <p>Descripcion del proyecto</p>
+                <input type="hidden" name="id_proyecto" value = {{proyecto.id}}>
+                <input type="hidden" name="name" value = {{proyecto.nombre}}>
+                <input type="submit" class = "boton" value="Ver más">
+                <a class = "button", href="#">
+                    <img src = "{%static 'img/edit.png' %}" alt="libro">
+                </a>
+                </div><!-fin cards_task--
+
+            </fieldset>
+            </form>
+            {% endfor %}
+
+
+
+            <div class="item add">
+                <a class="button", href= "{% url 'agregar_proyectos' %}">
+                    <img src = "{%static 'img/add.png' %}" alt="add">
+                </a>
+
+                <h1>Agregar Proyecto</h1>
+            </div>
+
+
+
+        </div><!-fin box_all--
+    </div><!-finlayout--
+
+-->
+<script>
+  const btnEliminar = document.querySelectorAll(".btnEliminar");
+  btnEliminar.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const confirmacion = confirm("¿Deseas eliminar el registro?");
+      if (!confirmacion) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
+</body>
+{% endblock %}
+</html>

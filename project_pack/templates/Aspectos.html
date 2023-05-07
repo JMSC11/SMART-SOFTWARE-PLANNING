@@ -1,0 +1,253 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Aspectos y complejidad</title>
+</head>
+<!--
+    <div>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#" style=" font-size: 35px; align-items: center">
+              <img src = "{%static 'img/smart_planning.png' %}" alt = "SP" width="300" height="70" class="d-inline-block align-text-top">
+            </a>
+        </nav>
+    </div>
+-->
+{%     block content     %}
+<body class="layout_principal">
+    <div class = "div_nav">
+        {%block navegacion %}
+        <li><a href= "{% url 'ReqFuncionalListView' %}"      target="_blank">Requerimientos Funcionales</a></li>
+        <hr>
+        <li><a href= "{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
+        <hr>
+        {%endblock%}
+    </div>
+                <div class=" contenedor-centrado datos  box_y_conteiner">
+                    <div class="contenedor sombra lista">
+                        <h1>Aspectos y Complejidad</h1>
+
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+                            <h3>Entradas</h3>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de entradas interactivas complejidad baja:</label>
+                                       <input class="input-text" type="hidden"  name="artefacto" value="aspectos">
+                                        <input class="input-text" type="number"  name="num_In_Baja">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de entradas complejidad media:</label>
+                                        <input class="input-text" type="number"  name="num_In_Media">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de entradas complejidad alta:</label>
+                                        <input class="input-text" type="number"  name="num_In_Alta">
+                                    </div>
+                                </div>
+                            <h3>Salidas</h3>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de salidas complejidad baja:</label>
+                                        <input class="input-text" type="number"  name="num_Out_Baja">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de salidas complejidad media:</label>
+                                        <input class="input-text" type="number"  name="num_Out_Media">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de salidas complejidad alta:</label>
+                                        <input class="input-text" type="number"  name="num_Out_Alta">
+                                    </div>
+                                </div>
+                            <h3>Consultas</h3>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de consultas complejidad baja:</label>
+                                        <input class="input-text" type="number"  name="num_Cons_baja">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de consultas complejidad Media:</label>
+                                        <input class="input-text" type="number"  name="num_Cons_Media" >
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de consultas complejidad Alta:</label>
+                                        <input class="input-text" type="number"  name="num_Cons_Alta">
+                                    </div>
+                                </div>
+
+
+                            <h3>Archivos internos</h3>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos internos complejidad baja:</label>
+                                        <input class="input-text" type="number"  name="num_Inter_Baja">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos internos complejidad media:</label>
+                                        <input class="input-text" type="number"  name="num_Inter_Media">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos internos complejidad alta:</label>
+                                        <input class="input-text" type="number"  name="num_Inter_Alta">
+                                    </div>
+                                </div>
+
+                            <h3>Archivos externos</h3>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos externos complejidad baja:</label>
+                                        <input class="input-text" type="number"  name="num_Ext_Baja">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos externos complejidad media:</label>
+                                        <input class="input-text" type="number"  name="num_Ext_Media">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Número de archivos externos complejidad alta:</label>
+                                        <input class="input-text" type="number"  name="num_Ext_Alta">
+                                    </div>
+                                </div>
+
+
+                                <div class="botones">
+                                    <a class="boton" href="/">Regresar</a>
+                                    <button class ="boton">Siguiente</button>
+                                </div>
+
+
+                                {%if x == 1 %}
+                                    <br><br>
+                                    <div class="alert alert-success">
+                                        <h3>{{message}}</h3>
+                                    </div>
+                                {%endif%}
+
+                            </fieldset>
+
+                        </form>
+                    </div> <!-- fin contenedor  datos-->
+
+
+
+                                                 <div id="carouselExampleIndicators" class="carousel carousel-dark slide borrar" data-bs-ride="carousel">
+                              <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                              </div>
+                              <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="box_info cyan">
+                                          <h2>Entradas</h2>
+                                          <p style="font-size:12px;">Interfaces gráficas de usuario, formularios, cuadros de diálogo, controles o mensajes, a través de los cuales un usuario final
+                                          o cualquier otro programa pueda interactuar con el sistema de software.</p>
+                                    </div><!--fin cards_task-->
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="box_info cyan">
+                                          <h2>Salidas</h2>
+                                          <p style="font-size:12px">Interfaces gráficas de usuario, cuadros de texto, gráficos o mensajes que el programa genera para el usuario final o
+                                          cualquier otro programa.</p>
+                                    </div><!--fin cards_task-->
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="box_info cyan">
+                                          <h2>Consultas</h2>
+                                          <p style="font-size:12px">Combinaciones de entrada/salida o peticiones en las que cada entrada genera una salida inmediata.
+                                                                                                                                                              </p>
+                                    </div><!--fin cards_task-->
+                                </div>
+
+                                 <div class="carousel-item">
+                                    <div class="box_info cyan">
+                                          <h2>Archivos Internos</h2>
+                                          <p style="font-size:12px">Son los principales grupos lóogicos de datos de usuarios finales o información de control que están completamente controlados
+                                          por el programa. Un archivo lógico podría estar integrado de un único archivo plano o de una sola tabla en una base de datos
+                                          relacional, orientada a objetos, etc.</p>
+                                    </div><!--fin cards_task-->
+                                </div>
+
+                                 <div class="carousel-item">
+                                    <div class="box_info cyan">
+                                          <h2>Archivos Externos</h2>
+                                          <p style="font-size:12px">Archivos controlados por otros programas, con los que el programa va a interactuar (bases de datos externas, grupos de datos
+                                          lógicos o información de control que entre o salga del programa).</p>
+                                    </div><!--fin cards_task-->
+                                </div>
+
+                              </div>
+                              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                              </button>
+                              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                              </button>
+                            </div>
+                        </div>
+
+
+                </div>
+
+
+
+
+
+</body> <!-- layout_principal -->
+{% endblock %}
+</html>

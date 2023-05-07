@@ -1,0 +1,145 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Agregar Proyecto</title>
+</head>
+{%     block content     %}
+<body class = "layout_principal">
+    <div class = "div_nav"></div>
+                <div class="contenedor-centrado datos  box_y_conteiner ">
+                    <div class="contenedor sombra">
+                        <h1>¡Registra un nuevo proyecto!</h1>
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Nombre del proyecto</label>
+                                        <input class="input-text" type="text"  name="nombre" placeholder="Nombre del proyecto">
+                                    </div>
+                                </div>
+
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Tipo Proyecto:</label>
+                                        <div class="seleccionarTipo">
+
+                                            <label><input type="radio" name="categoria" value="Pequeña escala" required> Pequeña escala</label>
+                                            <label><input type="radio" name="categoria" value="Mediana escala" required> Mediana escala</label>
+                                            <label><input type="radio" name="categoria" value="Gran escala" required> Gran escala</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                          <label for="opcion">Lenguaje de programación:</label>
+                                          <select id="opcion" name="opcion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value="Go">Go</option>
+                                            <option value="Java">Java</option>
+                                            <option value="Python">Python</option>
+                                            <option value="PHP">PHP</option>
+                                            <option value="C++">C++</option>
+                                            <option value="JavaScript">JavaScript</option>
+                                            <option value="C">C</option>
+                                            <option value="Ruby">Ruby</option>
+                                            <option value="JSP">JSP</option>
+                                          </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="botones">
+                                    <a class="boton" href="/">Regresar</a>
+                                    <button class ="boton">Siguiente</button>
+                                </div>
+
+
+                            </fieldset>
+
+                        </form>
+
+                        <h4>La diferencia entre un software de mediana escala, pequeña escala y gran escala está determinada principalmente por el tamaño
+                            y la complejidad del software en cuestión, así como por la cantidad de usuarios que lo utilizan y el alcance del proyecto en general.</h4>
+                    </div> <!-- fin contenedor  datos-->
+
+
+
+                    <div class="datos">
+
+                        <div id="carouselExampleIndicators" class="carousel carousel-dark slide borrar" data-bs-ride="carousel" >
+                          <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                          </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item  active">
+                                <div class="box_info cyan">
+                                      <h2>Pequeña escala</h2>
+                                      <p style="font-size:14">El software de pequeña escala se refiere a aplicaciones de software relativamente simples y de corta duración, que generalmente están
+                                          diseñadas para ser utilizadas por un número limitado de usuarios. Estos proyectos pueden ser desarrollados por un pequeño equipo de
+                                          desarrolladores y pueden no requerir un gran esfuerzo en cuanto a planificación y gestión de proyectos.</p>
+                                </div><!--fin cards_task-->
+                            </div>
+                            <div class="carousel-item ">
+                                <div class="box_info cyan">
+                                      <h2>Mediana escala</h2>
+                                      <p style="font-size:14">Software más complejo y de mayor duración, que requiere un equipo de desarrollo más grande y un esfuerzo significativo en cuanto a
+                                          planificación y gestión de proyectos, diseñado para ser utilizado por un número mayor de usuarios.</p>
+                                </div><!--fin cards_task-->
+                            </div>
+                            <div class="carousel-item">
+                                <div class="box_info cyan">
+                                      <h2>Gran escala</h2>
+                                      <p style="font-size:14">Un software de gran escala es el tipo de software más complejo y extenso, que puede requerir el trabajo de un gran equipo de desarrolladores
+                                          y un esfuerzo significativo en cuanto a planificación y gestión de proyectos, diseñado para ser utilizado por un gran número de usuarios
+                                          y puede tener un impacto significativo en la organización o sector en el que se utiliza. Pueden requerir integración con múltiples sistemas
+                                          existentes y un enfoque especial en términos de seguridad, escalabilidad y mantenimiento a largo plazo. </p>
+                                </div><!--fin cards_task-->
+                            </div>
+                          </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+</body> <!-- layout_principal -->
+{% endblock %}
+</html>

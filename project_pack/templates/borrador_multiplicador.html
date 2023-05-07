@@ -1,0 +1,284 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Multiplicador de influencia</title>
+</head>
+{%     block content     %}
+<body  class="layout_principal">
+    <div class = "div_nav">
+        {%block navegacion %}
+        <li><a href="{% url 'ReqFuncionalListView' %}" target="_blank">Requerimientos Funcionales</a></li>
+        <hr>
+        <li><a href="{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
+        <hr>
+        {%endblock%}
+    </div>
+                <div class=" datos">
+                    <div class="contenedor sombra" style="width: 80%">
+                        <h1>¡Registra un nuevo proyecto!</h1>
+                        <h3>Selecionna el factor de influencia de cada pregunta de acuerdo a la siguiente escala:</h3>
+
+                        <div>
+                        <br>
+                        <br>
+                            <table class="escala">
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+
+                            <tr>
+                                <td>No influye</td>
+                                <td>Incidental</td>
+                                <td>Moderado</td>
+                                <td>Medio</td>
+                                <td>Significativo</td>
+                                <td>Esencial</td>
+                            </tr>
+
+                            </table>
+
+                        </div>
+
+
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+                        <br>
+                        <br>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A1">1.¿Se requiere que el sistema sea responsivo? </label>
+                                          <select id="A1" name="A1" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A2">2.¿Se requiere comunicación de datos?</label>
+                                          <select id="A2" name="A2" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A3">3. ¿Existen funciones de procesamiento distribuido?</label>
+                                          <select id="A3" name="A3" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A4">4.¿Es crítico el rendimiento?</label>
+                                          <select id="A4" name="A4" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A5">5. ¿El sistema requiere una alta modularización?</label>
+                                          <select id="A5" name="A5" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A6">6. ¿Requiere el sistema entrada de datos interactiva?</label>
+                                          <select id="A6" name="A6" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A7">7. ¿Requiere la entrada de datos interactiva que las transacciones de entrada se lleven a cabo sobre múltiples pantallas u operaciones?</label>
+                                          <select id="A7" name="A7" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A8">8. ¿El sistema considera una alta usabilidad, es decir?, ¿Se necesita que sea un sistema amigable para el usuario?</label>
+                                          <select id="A8" name="A8" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A9">9. ¿Son complejas las entradas, las salidas, los archivos o las peticiones?</label>
+                                          <select id="A9" name="A9" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A10">10. ¿Es complejo el procesamiento interno?</label>
+                                          <select id="A10" name="A10" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A11">11. ¿Se ha diseñado el código para ser reutilizable?</label>
+                                          <select id="A11" name="A11" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A12">12. ¿El sistema debe trabajar con otros sistemas? (Interoperabilidad)</label>
+                                          <select id="A12" name="A12" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A13">13. ¿Se ha diseñado el sistema para soportar múltiples instalaciones en diferentes organizaciones?</label>
+                                          <select id="A13" name="A13" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label for="A14">14. ¿Se considera la seguridad de los datos y del sistema?</label>
+                                          <select id="A14" name="A14" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                          </select>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="botones">
+                                    <a class="boton" href="/">Regresar</a>
+                                    <button class ="boton">Siguiente</button>
+                                </div>
+
+                            </fieldset>
+
+                        </form>
+                    </div> <!-- fin sombra -->
+
+                    </div> <!-- fin contenedor  datos-->
+
+</body> <!-- layout_principal -->
+{% endblock %}
+</htmll>

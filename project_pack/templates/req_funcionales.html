@@ -1,0 +1,141 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Requerimientos Funcionales</title>
+</head>
+{%     block content     %}
+<body>
+<div class="layout_principal">
+        <div class = "div_nav"></div>
+
+                <div class="contenedor-centrado datos  box_y_conteiner ">
+
+                    <div class="contenedor sombra">
+                        <h1>¡Registra tus requerimientos funcionales!</h1>
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+                                <h3>Agrega los requerimientos funcionales de tu proyecto uno a la vez.</h3>
+                                <h3> Cuando no tengas más requerimientos por agregar pulsa finalizar para continuar</h3>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                          <label for="opcion">Macrofuncionalidad</label>
+                                          <select id="opcion" name="opcion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                              {% for macro in lista_macrofuncionalidades %}
+                                                    <option value={{macro.id}}>{{macro.macrofuncionalidad}}</option>
+                                              {% endfor %}
+                                          </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Requerimiento:</label>
+                                        <input class="input-text" type="text"  name="requerimiento" placeholder="Requerimiento">
+                                        <input class="input-text" type="hidden"  name="artefacto" value="formulario">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Descripción:</label>
+                                        <textarea class="input-text" type="text_area"  name="descripcion" placeholder="Agregar una descripción del requerimiento" rows="5" maxlength="500"></textarea>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="botones">
+                                    <button class ="boton">Agregar</button>
+                                    <a class="boton" href="{% url 'req_no_funcional' %}">Finalizar</a>
+
+                                </div>
+
+                                {%if x == 1 %}
+                                    <br><br>
+                                    <div class="alert alert-success">
+                                        <h3>{{message}}</h3>
+                                    </div>
+                                {%endif%}
+
+
+                            </fieldset>
+
+                        </form>
+                </div> <!-- Fin contenedor centrado datos box_y_container-->
+
+<div class="container">
+        <div class=" lista">
+        {%if lista_requerimientos|length == 0 %}
+        <h2 style="text-align:center">No hay requerimientos para el proyecto</h2>
+        {%else%}
+        <table class="table table-hover">
+        <thead>
+        <tr>
+         <th class="col-1" scope="col">Usuario</th>
+         <th class="col-2" scope="col">Macrofuncionalidad</th>
+         <th class="col-2" scope="col">Requerimiento</th>
+         <th class="col-4" scope="col">Descripción</th>
+         <th scope="col-3"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for macro in lista_macrofuncionalidades%}
+               {% for req in lista_requerimientos %}
+                   {% if req.macrofuncionalidad_id == macro.id %}
+                       <tr>
+                         <td class="col-1">{{macro.usuarios}}</td>
+                         <th class="col-2.5" scope="row">{{macro.macrofuncionalidad}}</th>
+                         <td class="col-2.5">{{ req.requerimiento }}</td>
+                         <td class="col-4">{{ req.descripcion }}</td>
+                         <td class="col-3">
+
+                             <a href="{% url 'eliminar_req_funcional' req.id %}" class="ml-5 float-end btn btn-lg btn-danger btnEliminar">Eliminar</a>
+                            <!-- <a href="#" class="ml-5 float-end btn btn-lg btn-primary btnEliminar">Editar</a>  -->
+                             <button id="editar-funcional" onclick=" abrir_modal_edicion_funcional('{% url 'editar_funcional' req.id %}') "  class="btn btn-lg btn-primary float-end">Editar</button>
+                             <div class="modal fade" id="edicion_funcional" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> </div>
+
+                         </td>
+                       </tr>
+
+                   {%endif%}
+               {% endfor %}
+        {%endfor%}
+        </tbody>
+        </table>
+        {%endif%}
+           </div>
+
+        </div>
+
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src=" {% static 'js/scripts.js'%} "></script>
+</body> <!--Fin layout principal -->
+{% endblock %}
+</html>

@@ -1,0 +1,88 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Nueva cuenta</title>
+</head>
+<body>
+    <main>
+            <div class="datos">
+                <div class="contenedor sombra">
+                    <h1>¡Registra una nueva cuenta!</h1>
+                    <form method="POST" action="" class="formulario" >
+                        {%csrf_token%}
+                        <fieldset>
+                                {{ form | crispy }}
+
+                            <!--
+                            <div class="contenedor-campos">
+                                <div class="campo">
+                                    <label>Nombre</label>
+                                    <input class="input-text" type="text"  name="nombre" placeholder="Tu nombre">
+                                </div>
+                            </div>
+
+
+                            <div class="contenedor-campos">
+                                <div class="campo">
+                                    <label>Usuario</label>
+                                    <input class="input-text" type="text" name="username" placeholder="Tu usuario">
+                                </div>
+                            </div>
+
+                            <div class="contenedor-campos">
+                                <div class="campo">
+                                    <label>Correo electronico</label>
+                                    <input class="input-text" type="email"  name="email" placeholder="Tu email">
+                                </div>
+                            </div>
+
+                            <div class="contenedor-campos">
+                                <div class="campo">
+                                    <label>Password</label>
+                                    <input class="input-text" type="password" name="password" placeholder="Tu password">
+                                </div>
+                            </div>
+
+                            -->
+
+                            <div class="botones">
+                                <a class="boton" href= "{% url 'login' %}">Regresar</a>
+                                <button class ="boton">Registrar Cuenta</button>
+                            </div>
+
+                        {%if x == 1 %}
+                            <br><br>
+                            <div class="alert alert-success">
+                                <h3>{{message}}</h3>
+                            </div>
+                        {%endif%}
+
+                        </fieldset>
+
+                    </form>
+
+                </div>
+            </div>
+    </main>
+
+</body>
+</html>

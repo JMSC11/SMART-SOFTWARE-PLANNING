@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Multiplicador</title>
+</head>
+
+<div id="modal-editar-funcional" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabelFuncional">Modificar Multiplicador de Influencia</h3>
+            <a class="btn-close" href=" {% url 'detalles_proyecto' proyecto.id %}"></a>
+        </div>
+
+        <div class="modal-body">
+            <div class="row p-3">
+                <p class="fs-4">
+                    Puedes modificar cada una de las preguntas agregando una pregunta nueva directamente
+                en el cuadro de la pregunta, o bien, seleccionando de la lista de requerimientos no funcionales
+                del lado izquierdo aquel requerimiento que es importante para tu proyecto.
+                </p>
+                <p class="fs-2">
+                    !Solo tienes que arrastrar la opción que elijas hacia el recuadro de la pregunta a modificar!
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-5 border-end" >
+                    <!-- <nav class="nav flex-column">
+                      <a class="nav-link" href="#">Nueva Pregunta</a>
+                      <a class="nav-link" href="#">Seleccionar Requerimiento No Funcional</a>
+                    </nav> -->
+                    {% for req in lista_no_funcionales %}
+                        <div id="" class="border mb-3 p-2 select_req" draggable="true" ondragstart="drag(event)"> {{req.requerimiento}} - {{req.descripcion}}</div>
+                    {% endfor%}
+                </div>
+
+                <div class="col-7">
+                    <form action="" method="POST" class="formulario lista">
+                        <field>
+                            {%csrf_token%}
+                            <input type="hidden" name="artefacto" value = "multiplicador"> <!-- identifica el artefacto en el template detalles -->
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 1</label>
+                                <input class="form-control" type="input-text" id="input1" ondrop="drop1(event)" ondragover="allowDrop(event)" name="P1" value="{{preguntas.p1}}">
+                                <label class="form-label mt-3">RESPUESTA 1</label>
+                                  <select id="A1" name="A1" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer1 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer1 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer1 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer1 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer1 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer1 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 2</label>
+                                <input class="form-control" type="input-text" id="input2" ondrop="drop2(event)" ondragover="allowDrop(event)" name="P2" value="{{preguntas.p2}}">                                <label class="form-label mt-3">RESPUESTA 2</label>
+                                  <select id="A2" name="A2" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer2 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer2 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer2 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer2 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer2 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer2 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 3</label>
+                                <input class="form-control" type="input-text" id="input3" ondrop="drop3(event)" ondragover="allowDrop(event)" name="P3" value="{{preguntas.p3}}">                                <label class="form-label mt-3">RESPUESTA 3</label>
+                                  <select id="A3" name="A3" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer3 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer3 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer3 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer3 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer3 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer3 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 4</label>
+                                <input class="form-control" type="input-text" id="input4" ondrop="drop4(event)" ondragover="allowDrop(event)" name="P4" value="{{preguntas.p4}}">
+                                <label class="form-label mt-3">RESPUESTA 4</label>
+                                  <select id="A4" name="A4" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer4 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer4 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer4 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer4 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer4 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer4 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 5</label>
+                                <input class="form-control" type="input-text" id="input5" ondrop="drop5(event)" ondragover="allowDrop(event)" name="P5" value="{{preguntas.p5}}">
+                                <label class="form-label mt-3">RESPUESTA 5</label>
+                                  <select id="A5" name="A5" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer5 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer5 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer5 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer5 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer5 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer5 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 6</label>
+                                <input class="form-control" type="input-text" id="input6" ondrop="drop6(event)" ondragover="allowDrop(event)" name="P6" value="{{preguntas.p6}}">                                <label class="form-label mt-3">RESPUESTA 6</label>
+                                  <select id="A6" name="A6" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer6 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer6 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer6 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer6 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer6 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer6 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 7</label>
+                                <input class="form-control" type="input-text" id="input7" ondrop="drop7(event)" ondragover="allowDrop(event)" name="P7" value="{{preguntas.p7}}">
+                                <label class="form-label mt-3">RESPUESTA 7</label>
+                                  <select id="A7" name="A7" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer7 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer7 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer7 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer7 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer7 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer7 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 8</label>
+                                <input class="form-control" type="input-text" id="input8" ondrop="drop8(event)" ondragover="allowDrop(event)" name="P8" value="{{preguntas.p8}}">
+                                <label class="form-label mt-3">RESPUESTA 8</label>
+                                  <select id="A8" name="A8" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer8 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer8 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer8 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer8 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer8 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer8 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 9</label>
+                                <input class="form-control" type="input-text" id="input9" ondrop="drop9(event)" ondragover="allowDrop(event)" name="P9" value="{{preguntas.p9}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                  <select id="A9" name="A9" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer9 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer9 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer9 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer9 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer9 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer9 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 10</label>
+                                <input class="form-control" type="input-text" id="input10" ondrop="drop10(event)" ondragover="allowDrop(event)" name="P10" value="{{preguntas.p10}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                <label class="form-label mt-3">RESPUESTA 10</label>
+                                  <select id="A10" name="A10" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer10 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer10 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer10 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer10 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer10 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer10 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 11</label>
+                                <input class="form-control" type="input-text" id="input11" ondrop="drop11(event)" ondragover="allowDrop(event)" name="P11" value="{{preguntas.p11}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                <label class="form-label mt-3">RESPUESTA 11</label>
+                                  <select id="A11" name="A11" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer11 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer11 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer11 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer11 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer11 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer11 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 12</label>
+                                <input class="form-control" type="input-text" id="input12" ondrop="drop12(event)" ondragover="allowDrop(event)" name="P12" value="{{preguntas.p12}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                <label class="form-label mt-3">RESPUESTA 12</label>
+                                  <select id="A12" name="A12" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer12 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer12 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer12 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer12 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer12 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer12 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 13</label>
+                                <input class="form-control" type="input-text" id="input13" ondrop="drop13(event)" ondragover="allowDrop(event)" name="P13" value="{{preguntas.p13}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                <label class="form-label mt-3">RESPUESTA 13</label>
+                                  <select id="A13" name="A13" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer13 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer13 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer13 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer13 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer13 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer13 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">PREGUNTA 14</label>
+                                <input class="form-control" type="input-text" id="input14" ondrop="drop14(event)" ondragover="allowDrop(event)" name="P14" value="{{preguntas.p14}}">                                <label class="form-label mt-3">RESPUESTA 9</label>
+                                <label class="form-label mt-3">RESPUESTA 14</label>
+                                  <select id="A14" name="A14" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <option value=0 {% if respuestas.Answer14 == 0 %}selected{% endif %} >0</option>
+                                    <option value=1 {% if respuestas.Answer14 == 1 %}selected{% endif %} >1</option>
+                                    <option value=2 {% if respuestas.Answer14 == 2 %}selected{% endif %} >2</option>
+                                    <option value=3 {% if respuestas.Answer14 == 3 %}selected{% endif %} >3</option>
+                                    <option value=4 {% if respuestas.Answer14 == 4 %}selected{% endif %} >4</option>
+                                    <option value=5 {% if respuestas.Answer14 == 5 %}selected{% endif %} >5</option>
+                                  </select>
+                            </div>
+
+                        </field>
+                        <a class="btn btn-danger" href=" {% url 'detalles_proyecto' proyecto.id %}" >Cancelar</a>
+                        <button class="btn btn-primary" type="submit">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body> <!-- layout_principal -->
+
+</html>

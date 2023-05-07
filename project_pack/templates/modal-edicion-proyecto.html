@@ -1,0 +1,87 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Editar Proyecto</title>
+</head>
+<body>
+<div id="modal-editar" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edición proyecto</h5>
+            <a class="btn-close" href=" {% url 'detalles_proyecto' proyecto.id %}"></a>
+        </div>
+
+        <div class="modal-body">
+                        <form method="POST" action=" " class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+
+                                <input type="hidden" name="artefacto" value = "proyecto">
+                                <div class="mb-3">
+                                    <label for="formName" class="form-label">Nombre del proyecto:</label>
+                                    <input class="form-control" type="text" id="formName" name="nombre" value="{{proyecto.nombre}}">
+                                </div>
+
+
+
+                                <div class="mb-3">
+                                        <label>Tipo Proyecto:</label>
+                                        <div class="seleccionarTipo">
+
+                                            <label><input type="radio" name="categoria" value="Pequeña escala" required {% if proyecto.tipo_proyecto == 'Pequeña escala' %}checked{% endif %} > Pequeña escala</label>
+                                            <label><input type="radio" name="categoria" value="Mediana escala" required {% if proyecto.tipo_proyecto == 'Mediana escala' %}checked{% endif %} > Mediana escala</label>
+                                            <label><input type="radio" name="categoria" value="Gran escala" required {% if proyecto.tipo_proyecto == 'Gran escala' %}checked{% endif %} > Gran escala</label>
+                                        </div>
+                                </div>
+
+
+                                <div class="mb-3">
+                                      <label for="opcion">Lenguaje de programación:</label>
+                                      <select id="opcion" name="opcion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                        <option value="Go" {% if proyecto.lenguaje == 'Go' %}selected{% endif %} >Go</option>
+                                        <option value="Java" {% if proyecto.lenguaje == 'Java' %}selected{% endif %}>Java</option>
+                                        <option value="Python" {% if proyecto.lenguaje == 'Python' %}selected{% endif %}>Python</option>
+                                        <option value="PHP" {% if proyecto.lenguaje == 'PHP' %}selected{% endif %}>PHP</option>
+                                        <option value="C++" {% if proyecto.lenguaje == 'C++' %}selected{% endif %}>C++</option>
+                                        <option value="JavaScript" {% if proyecto.lenguaje == 'JavaScript' %}selected{% endif %}>JavaScript</option>
+                                        <option value="C" {% if proyecto.lenguaje == 'C' %}selected{% endif %}>C</option>
+                                        <option value="Ruby" {% if proyecto.lenguaje == 'Ruby' %}selected{% endif %}>Ruby</option>
+                                        <option value="JSP" {% if proyecto.lenguaje == 'JSP' %}selected{% endif %}>JSP</option>
+                                      </select>
+                                </div>
+                            </fieldset>
+                            <a class="btn btn-danger" href=" {% url 'detalles_proyecto' proyecto.id %}">Cancelar</a>
+                            <button class="btn btn-primary" type="submit">Confirmar</button>
+                        </form>
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

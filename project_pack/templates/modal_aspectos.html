@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Aspectos y complejidad</title>
+</head>
+
+<div id="modal-editar-funcional" class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabelFuncional">Modificar Aspectos y su Complejidad</h3>
+            <a class="btn-close" href=" {% url 'detalles_proyecto' proyecto.id %}"></a>
+        </div>
+
+        <div class="modal-body">
+
+            <form action="" method="POST" class="formulario lista">
+                <field>
+                    {%csrf_token%}
+                    <input type="hidden" name="artefacto" value = "aspectos"> <!-- identifica el artefacto en el template detalles -->
+                    <h5 class="mt-5">Entradas Interactivas</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Número de entradas interactivas complejidad baja:</label>
+                        <input class="form-control" type="number"  name="num_In_Baja" value="{{aspectos.numEntradasBaja}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de entradas interactivas complejidad media:</label>
+                        <input class="form-control" type="number"  name="num_In_Media" value="{{aspectos.numEntradasMedia}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de entradas interactivas complejidad alta:</label>
+                        <input class="form-control" type="number"  name="num_In_Alta" value="{{aspectos.numEntradasAlta}}">
+                    </div>
+                    <!--Salidas-->
+                    <h5 class="mt-5">Salidas Interactivas</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Número de salidas complejidad baja:</label>
+                        <input class="form-control" type="number"  name="num_Out_Baja" value="{{aspectos.numSalidasBaja}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de salidas complejidad media:</label>
+                        <input class="form-control" type="number"  name="num_Out_Media" value="{{aspectos.numSalidasMedia}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de salidas complejidad alta:</label>
+                        <input class="form-control" type="number"  name="num_Out_Alta" value="{{aspectos.numSalidasAlta}}">
+                    </div>
+
+                    <!--Consultas-->
+                    <h5 class="mt-5">Consultas</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Número de consultas complejidad baja:</label>
+                        <input class="form-control" type="number"  name="num_Cons_Baja" value="{{aspectos.numConsultasBaja}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de consultas complejidad media:</label>
+                        <input class="form-control" type="number"  name="num_Cons_Media" value="{{aspectos.numConsultasMedia}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de consultas complejidad alta:</label>
+                        <input class="form-control" type="number"  name="num_Cons_Alta" value="{{aspectos.numConsultasAlta}}">
+                    </div>
+
+
+                    <!--Archivos Internos-->
+                    <h5 class="mt-5">Archivos Internos</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos internos complejidad baja:</label>
+                        <input class="form-control" type="number"  name="num_Inter_Baja" value="{{aspectos.numArchivosInternosBaja}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos internos complejidad media:</label>
+                        <input class="form-control" type="number"  name="num_Inter_Media" value="{{aspectos.numArchivosInternosMedia}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos internos complejidad alta:</label>
+                        <input class="form-control" type="number"  name="num_Inter_Alta" value="{{aspectos.numArchivosInternosAlta}}">
+                    </div>
+
+                    <!--Archivos Externos-->
+                    <h5 class="mt-5">Archivos Externos</h5>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos externos complejidad baja:</label>
+                        <input class="form-control" type="number"  name="num_Ext_Baja" value="{{aspectos.numExternosBaja}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos externos complejidad media:</label>
+                        <input class="form-control" type="number"  name="num_Ext_Media" value="{{aspectos.numExternosMedia}}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Número de archivos externos complejidad alta:</label>
+                        <input class="form-control" type="number"  name="num_Ext_Alta" value="{{aspectos.numExternosAlta}}">
+                    </div>
+
+
+                </field>
+                <a class="btn btn-danger" href=" {% url 'detalles_proyecto' proyecto.id %}" >Cancelar</a>
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body> <!-- layout_principal -->
+
+</html>

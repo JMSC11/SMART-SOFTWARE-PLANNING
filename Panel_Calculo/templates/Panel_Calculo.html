@@ -1,0 +1,92 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" >
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Panel Calculo</title>
+</head>
+{%     block content     %}
+  <body class = "layout_principal ">
+      <div class = "div_nav">
+      </div> <!-- fin div_nav-->
+
+    <div class = "layout">
+
+       <div class="row mt-5 justify-content-md-center">
+            <h1 class="col-8" >Selecciona la operación que deseas utilizar para el proyecto {{ proyecto.nombre }}</h1>
+       </div>
+        <div class="row justify-content-md-center mt-5">
+            <div class="col-5">
+                  <div class="box  blue mr-8 ml-5 p-5">
+                      <h2>Puntos de función</h2>
+                      <p>Calcula los puntos de función de tu proyecto utilizando
+                      el método IBM</p>
+                      <br>
+                      <img src = "{%static 'img/pf.png' %}" alt="libro">
+                      <br>
+                        <a class = "boton pt-4 pb-4">Seleccionar</a>
+
+
+                </div><!--fin cards_task-->
+            </div>
+            <div class="col-5">
+                <div class="box  blue mr-5 ml-5 p-5">
+                      <h2>Esfuerzo persona mes</h2>
+                      <p>Calcula el esfuerzo persona mes de tu proyecto utilizando
+                      el método COCOMO</p>
+                      <img src = "{%static 'img/esfuerzo.png' %}" alt="libro">
+                    <br>
+                        <a class = "boton pt-4 pb-4">Seleccionar</a>
+
+                </div><!--fin cards_task-->
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center mt-5">
+            <div class="col-5">
+                  <div class="box  blue mr-8 ml-5">
+                      <h2>Planeación en meses</h2>
+                      <p>Manten el control del tiempo de desarrollo obteniendo la cantidad de
+                      meses que te tomará desarrollar tu proyecto con ayuda del Primer Orden de Jones</p>
+                      <img src = "{%static 'img/calendario.png' %}" alt="calendario">
+                      <br>
+                        <a class = "boton pt-4 pb-4">Seleccionar</a>
+
+                </div><!--fin cards_task-->
+            </div>
+            <div class="col-5">
+                <div class="box  blue mr-5 ml-5">
+                      <h2>Líneas de código</h2>
+                      <p>Visualiza el tamaño del código fuente conociendo la cantidad de líneas de código
+                      estimadas para el desarrollo de tu proyecto de software.</p>
+                    <img src = "{%static 'img/lineas_codigo.png' %}" alt="libro">
+                      <br><br>
+
+                        <a class = "boton pt-4 pb-4">Seleccionar</a>
+
+
+                </div><!--fin cards_task-->
+            </div>
+        </div>
+
+
+  </body>
+{% endblock %}
+</html>

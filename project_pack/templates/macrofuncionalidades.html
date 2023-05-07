@@ -1,0 +1,147 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Requerimientos Funcionales</title>
+</head>
+
+{%     block content     %}
+<body class = "layout_principal">
+    <div class = "div_nav"></div> <!--Fin navegacion -->
+
+                <div class="contenedor-centrado datos  box_y_conteiner ">
+
+              <div class="contenedor sombra">
+                        <h1>¡Registra tus Macrofuncionalidades!</h1>
+                        <form method="POST" action="" class="formulario" >
+                            {%csrf_token%}
+                            <fieldset>
+                                <h3>Registra las macrofuncionalidades de tu proyecto!</h3>
+                                <h3>Posteriormente registra las funcionalidades específicas de cada funcionalidad.</h3>
+
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Macrofuncionalidad:</label>
+                                        <input class="input-text" type="text"  name="macrofuncionalidad" placeholder="Ej: Gestión de autenticación">
+                                    </div>
+                                </div>
+
+                                <div class="contenedor-campos">
+                                    <div class="campo">
+                                        <label>Usuarios que utilizan la macrofuncionalidad:</label>
+                                        <input class="input-text" type="text"  name="usuarios" placeholder="Ej: Administrador, Cliente"></input>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="botones">
+                                    <button class ="boton">Agregar</button>
+                                    <a class="boton" href="{% url 'req_funcional' %}">Finalizar</a>
+                                </div>
+
+                                {%if x == 1 %}
+                                    <br><br>
+                                    <div class="alert alert-success">
+                                        <h3>{{message}}</h3>
+                                    </div>
+                                {%endif%}
+
+
+                            </fieldset>
+
+                        </form>
+
+              </div> <!-- fin contenedor  datos-->
+
+
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-10">
+                <h1 class="pt-5 ">Lista de Macrofuncionalidades</h1>
+                {%if macrofuncionalidades|length == 0 %}
+                    <h2>No hay macrofuncionalidades para el proyecto</h2>
+                {%else%}
+                <div class="table-responsive-sm mt-5">
+                    <table class="table table-hover table">
+                      <thead>
+                        <tr>
+
+                          <th scope="col">Macrofuncionalidad</th>
+                          <th scope="col">Usuarios</th>
+                          <th scope="col"></th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for macro in macrofuncionalidades %}
+                            <tr>
+                              <td>{{ macro.macrofuncionalidad }}</td>
+                              <td>{{ macro.usuarios }}</td>
+                              <td>
+                                  <a href="{% url 'eliminar_macro' macro.id %}" class="ml-5 float-end btn btn-lg btn-danger btnEliminar">Eliminar</a>
+                                  <a href="#" class="ml-5 float-end btn btn-lg btn-primary btnEliminar">Editar</a>
+
+                              </td>
+                            </tr>
+                        {%endfor%}
+                      </tbody>
+                    </table>
+                    {%endif%}
+                </div> <!-- fin table-responsive -->
+
+
+<!--
+                <div class=" sombra">
+
+                    <h1>Macrofuncionalidades</h1>
+                        <div class="box_list_container">
+                            {%if macrofuncionalidades|length == 0 %}
+                                <h2>No hay macrofuncionalidades para el proyecto</h2>
+                            {%else%}
+                                {% for macro in macrofuncionalidades %}
+                                    <div class="item  box cyan">
+                                        <h2>{{ macro.macrofuncionalidad }}</h2>
+                                        <p>{{ macro.usuarios }}</p>
+                                    </div><!-fin cards_task->
+                                {% endfor %}
+                            {%endif%}
+                        </div>
+                </div>
+
+-->
+<script>
+  const btnEliminar = document.querySelectorAll(".btnEliminar");
+  btnEliminar.forEach(btn => {
+    btn.addEventListener("click", e => {
+      const confirmacion = confirm("¿Deseas eliminar el registro?");
+      if (!confirmacion) {
+        e.preventDefault();
+      }
+    });
+  });
+</script>
+
+
+</body> <!--Fin layout principal -->
+{% endblock %}
+</html>
