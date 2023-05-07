@@ -47,6 +47,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
+CSRF_TRUSTED_ORIGINS = ['https://smart-software-planning-production.up.railway.app/']
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
