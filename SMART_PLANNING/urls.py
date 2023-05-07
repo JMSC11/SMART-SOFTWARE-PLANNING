@@ -17,6 +17,8 @@ from django.contrib.auth import login
 from django.contrib.auth.views import logout_then_login
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -26,3 +28,5 @@ urlpatterns = [
     path('', include('project_pack.urls')),
     path('', include('Panel_Calculo.urls')),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
