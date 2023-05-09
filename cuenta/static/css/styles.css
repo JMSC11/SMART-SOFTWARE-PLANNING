@@ -129,7 +129,7 @@ body{
 .contenedor-centrado{
     margin: 0 auto;
     padding: 20 0 px;
-    width: 150vh;
+    width: 130vh;
 }
 .fondo-inicio{
     background-color: var(--greenSheen);
