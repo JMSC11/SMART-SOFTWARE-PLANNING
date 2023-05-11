@@ -113,17 +113,17 @@ WSGI_APPLICATION = 'SMART_PLANNING.wsgi.application'
 #    }
 #}
 # PGPASSWORD=FTSnka78qLTmVS5rk50F psql -h containers-us-west-128.railway.app -U postgres -p 5846 -d railway
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'smart_planning',
-#        'USER': 'sp',
-#        'PASSWORD': 'smartpnanning',
-#        'HOST': 'localhost',
-#        'PORT': '5432',
-#    }
-#}
 DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'smart_planning',
+       'USER': 'sp',
+       'PASSWORD': 'smartpnanning',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
+}
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
@@ -132,7 +132,7 @@ DATABASES = {
         'HOST': 'containers-us-west-128.railway.app',
         'PORT': '5846',
     }
-}
+}"""
 
 
 

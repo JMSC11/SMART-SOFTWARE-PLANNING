@@ -9,6 +9,8 @@
     });
   });
 
+
+
 var $ = jQuery.noConflict();
 
 function abrir_modal_multiplicador(url){
