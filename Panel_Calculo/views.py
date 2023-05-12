@@ -10,6 +10,7 @@ from project_pack.proyecto import Proyecto
 from project_pack.AspectosANDComplejidad import AspectosANDComplejidad
 from project_pack.Multiplicador_Influencia import Multiplicador_Influencia
 from Panel_Calculo.PuntosFuncion import PuntosFuncion
+from Panel_Calculo.KLDC import KLDC
 from project_pack.Requerimiento_Funcional import Requerimiento_Funcional
 from project_pack.Requerimiento_no_Funcional import Requerimiento_no_Funcional
 from project_pack.Macrofuncionalidad import Macrofuncionalidad
@@ -116,7 +117,7 @@ def Puntos_Funcion(request, id):
                                                        'sum' : sum,
                                                        })
 
-def KLDC(request, id):
+def KLDC_VIEW(request, id):
     if request.method == 'GET':
         proyecto = get_object_or_404(Proyecto, pk=id)
         PFA = PuntosFuncion.objects.get(proyecto = proyecto)
@@ -132,8 +133,16 @@ def KLDC(request, id):
                   '.NET' : 55,
                   'GO' : 20,
                   }
-
-        print(proyecto)
+        value = LDCxPF[proyecto.lenguaje]
+        LDC = PFA.puntos_funcion_ajustados * value
+        v_KLDC = LDC/1000
+        if not KLDC.objects.filter(proyecto_id = id):
+            kldc = KLDC.objects.create( KLDC = v_KLDC, proyecto=proyecto )
+            kldc.save()
         return render(request, 'kldc.html', {'proyecto' : proyecto,
                                              'PFA' : PFA,
+                                             'KLDC' : v_KLDC,
+                                             'LDCxPF' : LDCxPF,
+                                             'value' : value,
+                                             'LDC' : LDC,
                                              })

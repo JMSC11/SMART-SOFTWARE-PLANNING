@@ -10,6 +10,6 @@ urlpatterns = [
     path('Panel_Calculo/', views.Panel_Calculo, name='Panel_Calculo'),
     path('Eleccion_Proyecto/', views.Eleccion_Proyecto, name='Eleccion_Proyecto'),
     path('Puntos_Funcion/<id>', views.Puntos_Funcion, name='Puntos_Funcion'),
-    path('KLDC/<id>', views.KLDC, name='KLDC'),
+    path('KLDC_VIEW/<id>', views.KLDC_VIEW, name='KLDC_VIEW'),
 
 ]

@@ -61,6 +61,38 @@
 <!--                </div>-->
 <!--            </form>-->
 <!--        </div>-->
+        <div class="row">
+            <h2 class="mt-5">Tabla de conversion PF a LDC</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Lenguaje</th>
+                      <th scope="col">LDC por PF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for key, value in LDCxPF.items %}
+                    <tr>
+                      <th scope="row">{{key}}</th>
+                      <td>{{value}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+        </div>
+
+        <div class="row mt-5">
+            <p>Identificamos las lineas de código correspondientes para el lenguaje de programación seleccionado para desarrollar el proyecto,
+            en este caso el lenguaje es: <strong>{{proyecto.lenguaje}}</strong></p>
+            <p class=" mt-5">La formula para obtener las líneas de código a partir de los puntos de función es:</p>
+            <p class="fst-italic fs-1 text-center"> LDC = PFA &times; (LDC por PF)</p>
+            <p class=" mt-5">Sustituyendo los valores tenemos:</p>
+            <p class="fst-italic fs-1 text-center"> LDC = {{PFA.puntos_funcion_ajustados}} &times; {{value}}</p>
+            <p class=" mt-5">Finalmente, tenemos el resultado de calcular las Líneas de código</p>
+            <p class="fst-italic fs-1 text-center"> LDC = {{LDC}}</p>
+            <p class=" mt-5">Y las líneas de código en miles</p>
+            <p class="fst-italic fs-1 text-center"> KLDC = {{KLDC}}</p>
+        </div>
 
     </div>
 

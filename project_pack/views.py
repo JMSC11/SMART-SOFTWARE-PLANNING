@@ -354,7 +354,7 @@ def detalles_proyecto(request, id):
                 proyecto.user = usuario
                 proyecto.nombre = request.POST['nombre']
                 proyecto.tipo_proyecto = request.POST['categoria']
-                proyecto.lenguaje = request.POST.('opcion')
+                proyecto.lenguaje = request.POST['opcion']
 
                 proyecto.save()
                 return redirect('detalles_proyecto', id)
