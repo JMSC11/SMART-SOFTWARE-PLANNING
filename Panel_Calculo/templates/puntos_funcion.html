@@ -1,0 +1,281 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Puntos de función</title>
+</head>
+<!--
+    <div>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#" style=" font-size: 35px; align-items: center">
+              <img src = "{%static 'img/smart_planning.png' %}" alt = "SP" width="300" height="70" class="d-inline-block align-text-top">
+            </a>
+        </nav>
+    </div>
+-->
+{%     block content     %}
+<body class="layout_principal pb-5">
+    <div class = "div_nav">
+        {%block navegacion %}
+        <li><a href= "{% url 'ReqFuncionalListView' %}"      target="_blank">Requerimientos Funcionales</a></li>
+        <hr>
+        <li><a href= "{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
+        <hr>
+        {%endblock%}
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mt-5 text-center mb-5">CALCULO DE LOS PUNTOS DE FUNCIÓN PARA: {{proyecto.nombre}}</h1>
+
+        <h2 class="mt-5">1. Calculo de los puntos de función sin ajustar (PF)</h2>
+
+        <p class="mt-5">Para calcular los puntos de función, es necesario comenzar revisando la tabla de Aspectos,
+        el número de interfaces de cada aspecto se multiplicará por un factor determinado, tal como se muestra en la
+        siguiente tabla.</p>
+
+        <div class="mt-5 row">
+            <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"> </th>
+                      <th scope="col">Complejidad baja</th>
+                      <th scope="col">Complejidad media</th>
+                      <th scope="col">Complejidad alta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Número de entradas interactivas</th>
+                      <td> {{aspectos.numEntradasBaja}}&times;3 = {{operaciones.m1}}</td>
+                      <td> {{aspectos.numEntradasMedia}}&times;4 = {{operaciones.m2}}</td>
+                      <td> {{aspectos.numEntradasAlta}}&times;6 = {{operaciones.m3}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Número de salidas interactivas</th>
+                      <td> {{aspectos.numSalidasBaja}}&times;4 = {{operaciones.m4}}</td>
+                      <td> {{aspectos.numSalidasMedia}}&times;5 = {{operaciones.m5}}</td>
+                      <td> {{aspectos.numSalidasAlta}}&times;7 = {{operaciones.m6}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Número de consultas</th>
+                      <td> {{aspectos.numConsultasBaja}}&times;3 = {{operaciones.m7}}</td>
+                      <td> {{aspectos.numConsultasMedia}}&times;4 = {{operaciones.m8}}</td>
+                      <td> {{aspectos.numConsultasAlta}}&times;6 = {{operaciones.m9}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Número de archivos</th>
+                      <td> {{aspectos.numArchivosInternosBaja}}&times;7 = {{operaciones.m10}}</td>
+                      <td> {{aspectos.numArchivosInternosMedia}}&times;10 = {{operaciones.m11}}</td>
+                      <td> {{aspectos.numArchivosInternosAlta}}&times;15 = {{operaciones.m12}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Número de archivos externos</th>
+                      <td> {{aspectos.numExternosBaja}}&times;5 = {{operaciones.m13}}</td>
+                      <td> {{aspectos.numExternosMedia}}&times;7 = {{operaciones.m14}}</td>
+                      <td> {{aspectos.numExternosAlta}}&times;10 = {{operaciones.m15}}</td>
+                    </tr>
+                    <th scope="row" class="text-primary">Subtotal puntos de función sin ajustar</th>
+                      <td class="text-primary">{{subtotal_baja}}</td>
+                      <td class="text-primary">{{subtotal_media}}</td>
+                      <td class="text-primary">{{subtotal_alta}}</td>
+                    </tr>
+                    <th scope="row" class="text-success">Total puntos de función sin ajustar</th>
+                      <td class="text-center text-success" colspan="3">{{total}}</td>
+
+                    </tr>
+
+                  </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <h2 class="mt-5 mb-5">2. Calculo del multiplicador de influencia</h2>
+            <p>Una vez obtenidos los puntos de función sin ajustar, debemos revisar cada una de los valores de ajustes de la complejidad</p>
+            <div class="table-responsive">
+
+                <table class=" table caption-top">
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Respuesta</th>
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p1}}</td>
+                    <td >{{respuestas.Answer1}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p2}}</td>
+                    <td>{{respuestas.Answer2}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p3}}</td>
+                    <td>{{respuestas.Answer3}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p4}}</td>
+                    <td>{{respuestas.Answer4}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p5}}</td>
+                    <td>{{respuestas.Answer5}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p6}}</td>
+                    <td>{{respuestas.Answer6}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p7}}</td>
+                    <td>{{respuestas.Answer7}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p8}}</td>
+                    <td>{{respuestas.Answer8}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p9}}</td>
+                    <td>{{respuestas.Answer9}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p10}}</td>
+                    <td>{{respuestas.Answer10}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p11}}</td>
+                    <td>{{respuestas.Answer11}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p12}}</td>
+                    <td>{{respuestas.Answer12}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{preguntas.p13}}</td>
+                    <td>{{respuestas.Answer13}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{preguntas.p14}}</td>
+                    <td>{{respuestas.Answer14}}</td>
+
+                </tr>
+
+                <tr>
+                    <td class="text-primary">Suma de los valores de ajuste de la complejidad</td>
+                    <td class="text-primary">{{val_ajus_compl}}</td>
+
+                </tr>
+
+            </table>
+            </div>
+        </div> <!-- fin tabla multiplicador-->
+
+        <div class="row">
+            <h2 class="mt-5 mb-5">3. Calculo del total de los puntos de función ajustados</h2>
+            <p>Finalmente, obtenemos el total de los puntos de función ajustados operando la siguiente formula:</p>
+            <p>inserte aqui la formula</p>
+
+            <p class =" text-center fs-1">
+                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                    <mi>P</mi>
+                    <mi>F</mi>
+                    <mi>A</mi>
+                    <mo></mo>
+                    <mo>=</mo>
+                    <mo> </mo>
+                    <mi>P</mi>
+                    <mi>F</mi>
+                    <mo></mo>
+                    <mo>&times;</mo>
+                    <mo></mo>
+                    <mo>[</mo>
+                    <mn>0</mn>
+                    <mo>.</mo>
+                    <mn>65</mn>
+                    <mo></mo>
+                    <mo>+</mo>
+                    <mo></mo>
+                    <mn>0</mn>
+                    <mo>.</mo>
+                    <mn>01</mn>
+                    <mo></mo>
+                    <munder>
+                        <mrow>
+                            <mo>∑<sub>i</sub></mo>
+                            <mo></mo>
+                            <mi>f</mi>
+                        </mrow>
+                        <mi>i</mi>
+                    </munder>
+                    <mo>]</mo>
+                </math>
+            </p>
+            <div class="mb-5">
+                <p>De donde:</p>
+                <p>PF = {{total}}</p>
+                <p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <munder>
+                            <mrow>
+                                <mo>∑<sub>i</sub></mo>
+                                <mo></mo>
+                                <mi>f</mi>
+                            </mrow>
+                            <mi>i</mi>
+                        </munder>
+                    </math> = {{val_ajus_compl}}
+                </p>
+                <p>PFA = {{total}} [0.65 + 0.01 &times; {{val_ajus_compl}}]</p>
+                <p>PFA = {{total}} &times; {{ 0.65}} +{{fac_multi}}</p>
+                <p>PFA = {{total}} &times; {{sum}}</p>
+                <p>Finalmente, obtenemos los puntos de función ajustados</p>
+                <p class="fs-1 fw-bold mb-5">PFA = {{PFA}}</p>
+            </div>
+
+        </div>
+        <a class="btn text-center btn-primary btn-lg p-3 fs-4" href="{% url 'Panel_Calculo' %}">Regresar</a>
+    </div>
+
+
+
+</body> <!-- layout_principal -->
+{% endblock %}
+</html>

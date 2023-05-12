@@ -24,8 +24,14 @@
 </head>
 {%     block content     %}
   <body class = "layout_principal ">
-      <div class = "div_nav">
-      </div> <!-- fin div_nav-->
+    <div class = "div_nav">
+        {%block navegacion %}
+        <li><a href= "{% url 'ReqFuncionalListView' %}"      target="_blank">Requerimientos Funcionales</a></li>
+        <hr>
+        <li><a href= "{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
+        <hr>
+        {%endblock%}
+    </div>
 
     <div class = "layout">
 
@@ -41,20 +47,19 @@
                       <br>
                       <img src = "{%static 'img/pf.png' %}" alt="libro">
                       <br>
-                        <a class = "boton pt-4 pb-4">Seleccionar</a>
+                        <a class = "boton pt-4 pb-4" href=" {% url 'Puntos_Funcion' proyecto.id %}">Seleccionar</a>
 
 
                 </div><!--fin cards_task-->
             </div>
             <div class="col-5">
                 <div class="box  blue mr-5 ml-5 p-5">
-                      <h2>Esfuerzo persona mes</h2>
-                      <p>Calcula el esfuerzo persona mes de tu proyecto utilizando
-                      el método COCOMO</p>
-                      <img src = "{%static 'img/esfuerzo.png' %}" alt="libro">
+                    <h2>Líneas de código</h2>
+                    <p>Visualiza el tamaño del código fuente conociendo la cantidad de líneas de código
+                      estimadas para el desarrollo de tu proyecto de software.</p>
+                    <img src = "{%static 'img/lineas_codigo.png' %}" alt="libro">
                     <br>
-                        <a class = "boton pt-4 pb-4">Seleccionar</a>
-
+                    <a class = "boton pt-4 pb-4">Seleccionar</a>
                 </div><!--fin cards_task-->
             </div>
         </div>
@@ -73,12 +78,11 @@
             </div>
             <div class="col-5">
                 <div class="box  blue mr-5 ml-5">
-                      <h2>Líneas de código</h2>
-                      <p>Visualiza el tamaño del código fuente conociendo la cantidad de líneas de código
-                      estimadas para el desarrollo de tu proyecto de software.</p>
-                    <img src = "{%static 'img/lineas_codigo.png' %}" alt="libro">
-                      <br><br>
-
+                      <h2>Esfuerzo persona mes</h2>
+                      <p>Calcula el esfuerzo persona mes de tu proyecto utilizando
+                      el método COCOMO</p>
+                      <img src = "{%static 'img/esfuerzo.png' %}" alt="libro">
+                        <br>
                         <a class = "boton pt-4 pb-4">Seleccionar</a>
 
 
