@@ -113,3 +113,13 @@ def Puntos_Funcion(request, id):
                                                         'PFA' : PFA,
                                                        'sum' : sum,
                                                        })
+
+def KLDC(request, id_proyecto):
+    if request.method == 'GET':
+        proyecto = get_object_or_404(Proyecto, pk=id_proyecto)
+        PFA = get_object_or_404(PuntosFuncion, pk=id_proyecto)
+        print(PFA)
+        print(proyecto)
+        return render(request, 'kldc.html', {'proyecto' : proyecto,
+                                             'PFA' : PFA,
+                                             })

@@ -5,7 +5,7 @@ from project_pack.proyecto import Proyecto
 class PuntosFuncion(models.Model):
     proyecto = models.ForeignKey(Proyecto, on_delete = models.CASCADE)
     puntos_funcion_sin_ajustar = models.SmallIntegerField()
-    puntos_funcion_ajustados = models.SmallIntegerField()
+    puntos_funcion_ajustados = models.FloatField()
     multiplicador = models.SmallIntegerField()
 
 
