@@ -61,7 +61,7 @@ def agregar_proyectos(request):
             usuario = request.user
             print(usuario)
             proyecto = Proyecto.objects.create(user=usuario, nombre=request.POST['nombre'], tipo_proyecto=request.POST['categoria'],
-                                           lenguaje=request.POST.getlist('opcion'))
+                                           lenguaje=request.POST('opcion'))
             proyecto.save()
 
             id_proyecto = proyecto.pk
@@ -354,7 +354,7 @@ def detalles_proyecto(request, id):
                 proyecto.user = usuario
                 proyecto.nombre = request.POST['nombre']
                 proyecto.tipo_proyecto = request.POST['categoria']
-                proyecto.lenguaje = request.POST.getlist('opcion')
+                proyecto.lenguaje = request.POST.('opcion')
 
                 proyecto.save()
                 return redirect('detalles_proyecto', id)

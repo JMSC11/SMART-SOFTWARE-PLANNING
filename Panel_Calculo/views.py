@@ -1,3 +1,5 @@
+import ast
+
 from django.contrib.auth.decorators import login_required
 import logging
 from django.db import transaction
@@ -114,11 +116,23 @@ def Puntos_Funcion(request, id):
                                                        'sum' : sum,
                                                        })
 
-def KLDC(request, id_proyecto):
+def KLDC(request, id):
     if request.method == 'GET':
-        proyecto = get_object_or_404(Proyecto, pk=id_proyecto)
-        PFA = get_object_or_404(PuntosFuncion, pk=id_proyecto)
-        print(PFA)
+        proyecto = get_object_or_404(Proyecto, pk=id)
+        PFA = PuntosFuncion.objects.get(proyecto = proyecto)
+        #Construccion de diccionario
+        LDCxPF = {'C' : 28,
+                  'C++' : 24,
+                  'Java' : 45,
+                  'JavaScript' : 37,
+                  'JSP' : 54,
+                  'SQL' : 5,
+                  'Python' : 15,
+                  'C#' : 53,
+                  '.NET' : 55,
+                  'GO' : 20,
+                  }
+
         print(proyecto)
         return render(request, 'kldc.html', {'proyecto' : proyecto,
                                              'PFA' : PFA,
