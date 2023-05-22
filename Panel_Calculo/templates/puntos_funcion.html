@@ -41,13 +41,13 @@
         <hr>
         <li><a href= "{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
         <hr>
-        <li><a href= "{% url 'KLDC_VIEW' proyecto.id %}">Calcular KLDC</a></li>
+        <li><a href= "{% url 'KLDC_VIEW' puntos_de_funcion.proyecto.id %}">Calcular KLDC</a></li>
         <hr>
         {%endblock%}
     </div>
 
     <div class="container mt-5">
-        <h1 class="mt-5 text-center mb-5">CALCULO DE LOS PUNTOS DE FUNCIÓN PARA: {{proyecto.nombre}}</h1>
+        <h1 class="mt-5 text-center mb-5">CALCULO DE LOS PUNTOS DE FUNCIÓN PARA: {{puntos_de_funcion.proyecto.nombre}}</h1>
 
         <h2 class="mt-5">1. Calculo de los puntos de función sin ajustar (PF)</h2>
 
@@ -68,42 +68,42 @@
                   <tbody>
                     <tr>
                       <th scope="row">Número de entradas interactivas</th>
-                      <td> {{aspectos.numEntradasBaja}}&times;3 = {{operaciones.m1}}</td>
-                      <td> {{aspectos.numEntradasMedia}}&times;4 = {{operaciones.m2}}</td>
-                      <td> {{aspectos.numEntradasAlta}}&times;6 = {{operaciones.m3}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numEntradasBaja}}&times;3 = {{puntos_de_funcion.operaciones.m1}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numEntradasMedia}}&times;4 = {{puntos_de_funcion.operaciones.m2}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numEntradasAlta}}&times;6 = {{puntos_de_funcion.operaciones.m3}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Número de salidas interactivas</th>
-                      <td> {{aspectos.numSalidasBaja}}&times;4 = {{operaciones.m4}}</td>
-                      <td> {{aspectos.numSalidasMedia}}&times;5 = {{operaciones.m5}}</td>
-                      <td> {{aspectos.numSalidasAlta}}&times;7 = {{operaciones.m6}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numSalidasBaja}}&times;4 = {{puntos_de_funcion.operaciones.m4}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numSalidasMedia}}&times;5 = {{puntos_de_funcion.operaciones.m5}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numSalidasAlta}}&times;7 = {{puntos_de_funcion.operaciones.m6}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Número de consultas</th>
-                      <td> {{aspectos.numConsultasBaja}}&times;3 = {{operaciones.m7}}</td>
-                      <td> {{aspectos.numConsultasMedia}}&times;4 = {{operaciones.m8}}</td>
-                      <td> {{aspectos.numConsultasAlta}}&times;6 = {{operaciones.m9}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numConsultasBaja}}&times;3 = {{puntos_de_funcion.operaciones.m7}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numConsultasMedia}}&times;4 = {{puntos_de_funcion.operaciones.m8}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numConsultasAlta}}&times;6 = {{puntos_de_funcion.operaciones.m9}}</td>
                     </tr>
 
                     <tr>
                       <th scope="row">Número de archivos</th>
-                      <td> {{aspectos.numArchivosInternosBaja}}&times;7 = {{operaciones.m10}}</td>
-                      <td> {{aspectos.numArchivosInternosMedia}}&times;10 = {{operaciones.m11}}</td>
-                      <td> {{aspectos.numArchivosInternosAlta}}&times;15 = {{operaciones.m12}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numArchivosInternosBaja}}&times;7 = {{puntos_de_funcion.operaciones.m10}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numArchivosInternosMedia}}&times;10 = {{puntos_de_funcion.operaciones.m11}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numArchivosInternosAlta}}&times;15 = {{puntos_de_funcion.operaciones.m12}}</td>
                     </tr>
                     <tr>
                       <th scope="row">Número de archivos externos</th>
-                      <td> {{aspectos.numExternosBaja}}&times;5 = {{operaciones.m13}}</td>
-                      <td> {{aspectos.numExternosMedia}}&times;7 = {{operaciones.m14}}</td>
-                      <td> {{aspectos.numExternosAlta}}&times;10 = {{operaciones.m15}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numExternosBaja}}&times;5 = {{puntos_de_funcion.operaciones.m13}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numExternosMedia}}&times;7 = {{puntos_de_funcion.operaciones.m14}}</td>
+                      <td> {{puntos_de_funcion.aspectos.numExternosAlta}}&times;10 = {{puntos_de_funcion.operaciones.m15}}</td>
                     </tr>
                     <th scope="row" class="text-primary">Subtotal puntos de función sin ajustar</th>
-                      <td class="text-primary">{{subtotal_baja}}</td>
-                      <td class="text-primary">{{subtotal_media}}</td>
-                      <td class="text-primary">{{subtotal_alta}}</td>
+                      <td class="text-primary">{{puntos_de_funcion.subtotal_baja}}</td>
+                      <td class="text-primary">{{puntos_de_funcion.subtotal_media}}</td>
+                      <td class="text-primary">{{puntos_de_funcion.subtotal_alta}}</td>
                     </tr>
                     <th scope="row" class="text-success">Total puntos de función sin ajustar</th>
-                      <td class="text-center text-success" colspan="3">{{total}}</td>
+                      <td class="text-center text-success" colspan="3">{{puntos_de_funcion.total}}</td>
 
                     </tr>
 
@@ -123,86 +123,86 @@
                 </tr>
 
                 <tr>
-                    <td>{{preguntas.p1}}</td>
-                    <td >{{respuestas.Answer1}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p1}}</td>
+                    <td >{{puntos_de_funcion.respuestas.Answer1}}</td>
 
                 </tr>
 
                 <tr>
-                    <td>{{preguntas.p2}}</td>
-                    <td>{{respuestas.Answer2}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p2}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer2}}</td>
 
                 </tr>
                 <tr>
-                    <td>{{preguntas.p3}}</td>
-                    <td>{{respuestas.Answer3}}</td>
-
-                </tr>
-
-                <tr>
-                    <td>{{preguntas.p4}}</td>
-                    <td>{{respuestas.Answer4}}</td>
-
-                </tr>
-                <tr>
-                    <td>{{preguntas.p5}}</td>
-                    <td>{{respuestas.Answer5}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p3}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer3}}</td>
 
                 </tr>
 
                 <tr>
-                    <td>{{preguntas.p6}}</td>
-                    <td>{{respuestas.Answer6}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p4}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer4}}</td>
 
                 </tr>
                 <tr>
-                    <td>{{preguntas.p7}}</td>
-                    <td>{{respuestas.Answer7}}</td>
-
-                </tr>
-
-                <tr>
-                    <td>{{preguntas.p8}}</td>
-                    <td>{{respuestas.Answer8}}</td>
-
-                </tr>
-                <tr>
-                    <td>{{preguntas.p9}}</td>
-                    <td>{{respuestas.Answer9}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p5}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer5}}</td>
 
                 </tr>
 
                 <tr>
-                    <td>{{preguntas.p10}}</td>
-                    <td>{{respuestas.Answer10}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p6}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer6}}</td>
 
                 </tr>
                 <tr>
-                    <td>{{preguntas.p11}}</td>
-                    <td>{{respuestas.Answer11}}</td>
-
-                </tr>
-
-                <tr>
-                    <td>{{preguntas.p12}}</td>
-                    <td>{{respuestas.Answer12}}</td>
-
-                </tr>
-                <tr>
-                    <td>{{preguntas.p13}}</td>
-                    <td>{{respuestas.Answer13}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p7}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer7}}</td>
 
                 </tr>
 
                 <tr>
-                    <td>{{preguntas.p14}}</td>
-                    <td>{{respuestas.Answer14}}</td>
+                    <td>{{puntos_de_funcion.preguntas.p8}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer8}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p9}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer9}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p10}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer10}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p11}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer11}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p12}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer12}}</td>
+
+                </tr>
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p13}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer13}}</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{puntos_de_funcion.preguntas.p14}}</td>
+                    <td>{{puntos_de_funcion.respuestas.Answer14}}</td>
 
                 </tr>
 
                 <tr>
                     <td class="text-primary">Suma de los valores de ajuste de la complejidad</td>
-                    <td class="text-primary">{{val_ajus_compl}}</td>
+                    <td class="text-primary">{{puntos_de_funcion.val_ajus_compl}}</td>
 
                 </tr>
 
@@ -252,7 +252,7 @@
             </p>
             <div class="mb-5">
                 <p>De donde:</p>
-                <p>PF = {{total}}</p>
+                <p>PF = {{puntos_de_funcion.total}}</p>
                 <p>
                     <math xmlns="http://www.w3.org/1998/Math/MathML">
                         <munder>
@@ -263,13 +263,13 @@
                             </mrow>
                             <mi>i</mi>
                         </munder>
-                    </math> = {{val_ajus_compl}}
+                    </math> = {{puntos_de_funcion.val_ajus_compl}}
                 </p>
-                <p>PFA = {{total}} [0.65 + 0.01 &times; {{val_ajus_compl}}]</p>
-                <p>PFA = {{total}} &times; {{ 0.65}} +{{fac_multi}}</p>
-                <p>PFA = {{total}} &times; {{sum}}</p>
+                <p>PFA = {{total}} [0.65 + 0.01 &times; {{puntos_de_funcion.val_ajus_compl}}]</p>
+                <p>PFA = {{total}} &times; {{ 0.65}} +{{puntos_de_funcion.fac_multi}}</p>
+                <p>PFA = {{total}} &times; {{puntos_de_funcion.sum}}</p>
                 <p>Finalmente, obtenemos los puntos de función ajustados</p>
-                <p class="fs-1 fw-bold mb-5">PFA = {{PFA}}</p>
+                <p class="fs-1 fw-bold mb-5">PFA = {{puntos_de_funcion.PFA}}</p>
             </div>
 
         </div>

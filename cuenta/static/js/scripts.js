@@ -13,6 +13,12 @@
 
 var $ = jQuery.noConflict();
 
+function abrir_modal_tabla_pf_ldc(url){
+    $('#edicion_tabla_pf_ldc').load(url, function(){
+        $(this).modal('show');
+    });
+}
+
 function abrir_modal_multiplicador(url){
     $('#edicion_multiplicador').load(url, function(){
         $(this).modal('show');

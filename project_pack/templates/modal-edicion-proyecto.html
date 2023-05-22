@@ -58,15 +58,17 @@
                                 <div class="mb-3">
                                       <label for="opcion">Lenguaje de programación:</label>
                                       <select id="opcion" name="opcion" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                                        <option value="Go" {% if proyecto.lenguaje == 'Go' %}selected{% endif %} >Go</option>
-                                        <option value="Java" {% if proyecto.lenguaje == 'Java' %}selected{% endif %}>Java</option>
-                                        <option value="Python" {% if proyecto.lenguaje == 'Python' %}selected{% endif %}>Python</option>
+                                        <option value="GO" {% if proyecto.lenguaje == 'GO' %}selected{% endif %} >GO</option>
+                                        <option value="JAVA" {% if proyecto.lenguaje == 'Java' %}selected{% endif %}>JAVA</option>
+                                        <option value="PYTHON" {% if proyecto.lenguaje == 'Python' %}selected{% endif %}>PYTHON</option>
                                         <option value="PHP" {% if proyecto.lenguaje == 'PHP' %}selected{% endif %}>PHP</option>
-                                        <option value="C++" {% if proyecto.lenguaje == 'C++' %}selected{% endif %}>C++</option>
-                                        <option value="JavaScript" {% if proyecto.lenguaje == 'JavaScript' %}selected{% endif %}>JavaScript</option>
+                                        <option value="CPP" {% if proyecto.lenguaje == 'C++' %}selected{% endif %}>C++</option>
+                                        <option value="JAVASCRIPT" {% if proyecto.lenguaje == 'JavaScript' %}selected{% endif %}>JavaScript</option>
                                         <option value="C" {% if proyecto.lenguaje == 'C' %}selected{% endif %}>C</option>
-                                        <option value="Ruby" {% if proyecto.lenguaje == 'Ruby' %}selected{% endif %}>Ruby</option>
+                                        <option value="CSHARP" {% if proyecto.lenguaje == 'Ruby' %}selected{% endif %}>C#</option>
                                         <option value="JSP" {% if proyecto.lenguaje == 'JSP' %}selected{% endif %}>JSP</option>
+                                        <option value="SQL" {% if proyecto.lenguaje == 'Ruby' %}selected{% endif %}>SQL</option>
+                                        <option value="NET" {% if proyecto.lenguaje == 'JSP' %}selected{% endif %}>NET</option>
                                       </select>
                                 </div>
                             </fieldset>

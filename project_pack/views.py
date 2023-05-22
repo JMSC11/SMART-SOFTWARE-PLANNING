@@ -11,21 +11,16 @@ from .Requerimiento_no_Funcional import Requerimiento_no_Funcional
 from .Macrofuncionalidad import Macrofuncionalidad
 from .preguntas_factores import preguntas_factores
 from django.shortcuts import render, redirect, HttpResponse
-# Vistas basadas en clases
-from django.views.generic.list import ListView
 
 @login_required()
 def gestion_proyectos(request):
     if request.method == 'GET':
         user_id = request.user.id
         proyectos = Proyecto.objects.filter(user = user_id)
-        #proyectos = Proyecto.objects.all()
         return render(request, 'gestion_proyectos.html', {'proyectos': proyectos})
-        #return render(request, 'gestion_proyectos.html')
     else:
         print(request.POST)
         id_proyecto = request.POST['id_proyecto']
-        name = request.POST['name']
         request.session['id_proyecto'] = id_proyecto
         proyecto = Proyecto.objects.get(pk=id_proyecto)
         lista_macrofuncionalidad = Macrofuncionalidad.objects.filter(proyecto=proyecto)
@@ -56,7 +51,6 @@ def agregar_proyectos(request):
         return render(request, 'agregar_proyectos.html')
     else: # Method == POST
         print(request.POST)
-
         try:
             usuario = request.user
             print(usuario)
@@ -99,7 +93,6 @@ def Macro(request):
         return render(request, 'macrofuncionalidades.html', {
             'macrofuncionalidades': lista_macrofuncionalidad,
         })
-        #requerimientos = Requerimiento_Funcional.objects.all()
     else: # Method == POST
         print(request.POST)
         try:
