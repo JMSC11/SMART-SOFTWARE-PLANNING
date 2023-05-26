@@ -1,0 +1,112 @@
+{% extends "nav_lateral.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Krub:wght@400;700&display=swap" rel="stylesheet"><!-- comment -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+
+<!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Esfuerzo</title>
+</head>
+<!--
+    <div>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="#" style=" font-size: 35px; align-items: center">
+              <img src = "{%static 'img/smart_planning.png' %}" alt = "SP" width="300" height="70" class="d-inline-block align-text-top">
+            </a>
+        </nav>
+    </div>
+-->
+{%     block content     %}
+<body class="layout_principal pb-5">
+    <div class = "div_nav">
+        {%block navegacion %}
+        <li><a href= "{% url 'ReqFuncionalListView' %}"      target="_blank">Requerimientos Funcionales</a></li>
+        <hr>
+        <li><a href= "{% url 'ReqNoFuncionalListView' %}" target="_blank">Requerimientos no Funcionales</a></li>
+        <hr>
+        <li><a href= "{% url 'Puntos_Funcion' proyecto.id %}">Calcular PF</a></li>
+        <hr>
+        <li><a href= "{% url 'KLDC_VIEW' proyecto.id %}">Calcular KLDC</a></li>
+        <hr>
+        {%endblock%}
+    </div>
+
+    <div class="container mt-5">
+       <h1 class="mt-5 text-center mb-5">CALCULO DEL ESFUERZO PARA: {{proyecto.nombre}}</h1>
+        <h2 class="mt-5">1. Calculo del esfuerzo a partir de la planeacion</h2>
+        <p class="mt-5">Si se conoce el esfuerzo en personas-mes requerido para
+            el desarrollo de un proyecto, entonces resulta sencillo estimar la planeación
+            en meses, según la siguiente expresión:</p>
+        <p class="fs-1 text-center"> Planeacion = 3.0 * Esfuerzo <sup>1/3</sup></p>
+        <p>Despejando la formula para el esfuerzo</p>
+        <p class="fs-1 text-center"><math xmlns="http://www.w3.org/1998/Math/MathML">Esfuerzo = (<mfrac><mi>Planeacion</mi><mi>3</mi></mfrac></math> ) <sup><sup>3</sup></sup> </p>
+        <p class="fs-1 text-center"><math xmlns="http://www.w3.org/1998/Math/MathML">Esfuerzo = (<mfrac><mi>{{esfuerzo.planeacion}}</mi><mi>3</mi></mfrac></math> ) <sup><sup>3</sup></sup> </p>
+        <p class="fs-1 text-center"> Esfuerzo = {{esfuerzo.esfuerzo_jones}}</p>
+
+        <h2 class="mt-5">2. Calculo del esfuerzo a partir de COCOMO</h2>
+        <p> Aquí solo presentaremos las expresiones para la
+            estimación del esfuerzo del modelo COCOMO básico, el cual únicamente se basa en el
+            tamaño del software en KLDC. </p>
+
+        <p class = "fs-1 text-center">Esfuerzo = a<sub>b</sub> KLDC<sup>b <sub>b</sub> </sup> </p>
+        <p> De donde : </p>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Tipo de proyecto</th>
+                <th scope="col">a<sub>b</sub></th>
+                <th scope="col">b<sub>b</sub></th>
+                <th scope="col">c<sub>b</sub></th>
+                <th scope="col">d<sub>b</sub></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Pequeña escala</th>
+                <td>2.4 </td>
+                <td>1.05 </td>
+                <td>2.5 </td>
+                <td>0.38 </td>
+              </tr>
+              <tr>
+                <th scope="row">Mediana escala</th>
+                <td>3.0 </td>
+                <td>1.12 </td>
+                <td>2.5 </td>
+                <td>0.35 </td>
+              </tr>
+              <tr>
+                <th scope="row">Gran escala</th>
+                <td>3.6 </td>
+                <td>1.20 </td>
+                <td>2.5 </td>
+                <td>0.32 </td>
+              </tr>
+            </tbody>
+      </table>        
+
+      <p class = "fs-1 text-center">Esfuerzo = {{esfuerzo.ab}} &times ({{esfuerzo.kldc.KLDC}})<sup>{{esfuerzo.bb}} </sup> </p>
+      <p class = "fs-1 text-center">Esfuerzo = {{esfuerzo.esfuerzo_cocomo}}</p>
+        <a class="btn text-center btn-primary btn-lg p-3 fs-4" href="{% url 'Panel_Calculo' %}">Regresar</a>
+    </div>
+
+</body> <!-- layout_principal -->
+{% endblock %}
+</html>

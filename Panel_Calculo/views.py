@@ -8,7 +8,8 @@ from Panel_Calculo.PuntosFuncion import PuntosFuncion
 from Panel_Calculo.KLDC import KLDC
 from Panel_Calculo.LDCxPF import LDCxPF
 from django.shortcuts import render, redirect, HttpResponse
-
+from Panel_Calculo.Planeacion import Planeacion
+from Panel_Calculo.Esfuerzo import Esfuerzo
 # Create your views here.
 @login_required()
 def Panel_Calculo(request):
@@ -172,7 +173,6 @@ def Calcular_PF(id):
 ##modicar tabla
 def editar_tabla_pf_ldc(request, id):
     if request.method == 'GET':
-        print("dentro del get")
         proyecto = get_object_or_404(Proyecto, pk=id)
         usuario = proyecto.user
         tabla_ldc = LDCxPF.objects.get(user=usuario)
@@ -183,6 +183,31 @@ def editar_tabla_pf_ldc(request, id):
         return render(request, 'modal_tabla_pf_ldc.html', {'proyecto':proyecto,
                                                            'atributos_valores' : atributos_valores,
                                                            })
+
+def tablas_COCOMO():
+    
+    tabla_cocomo = {'Pequeña escala' : (2.5,0.38),
+                    'Mediana escala' : (2.5, 0.35),
+                    'Gran escala' : (2.5, 0.32),
+                    }
+    tabla_esfuerzo = {'Pequeña escala' : (2.4,1.05),
+                    'Mediana escala' : (3.0, 1.12),
+                    'Gran escala' : (3.6, 1.20),
+                    }
+    tablas = {'tabla_cocomo' : tabla_cocomo,
+             'tabla_esfuerzo' : tabla_esfuerzo,
+             }
+    return tablas
+
+
+def getPlaneacion(request, id):
+    if request.method == 'GET':
+        proyecto = get_object_or_404(Proyecto, pk=id)
+        planeacion = CalcularPlaneacion(id)
+        return render(request, 'planeacion.html', {'proyecto':proyecto,
+                                                   'planeacion' : planeacion,
+                                                   })
+    
 
 def CalcularPlaneacion(id):
     # CALCULAR LA PLANEACION 1ER ORDEN JONES
@@ -195,26 +220,19 @@ def CalcularPlaneacion(id):
     tipo_proyecto = proyecto.tipo_proyecto
     exp = tabla_planeacion[tipo_proyecto]
     planeacion = round(pow(PFA.puntos_funcion_ajustados ,exp), 2)
-
-    print(planeacion)
     # CALCULAR LA PLANEACION COCOMO
     kldc = KLDC.objects.get(proyecto=proyecto)
     ldcenmiles = kldc.KLDC
-    tabla_cocomo = {'Pequeña escala' : (2.5,0.38),
-                    'Mediana escala' : (2.5, 0.35),
-                    'Gran escala' : (2.5, 0.32),
-                    }
-    tabla_esfuerzo = {'Pequeña escala' : (2.4,1.05),
-                    'Mediana escala' : (3.0, 1.12),
-                    'Gran escala' : (3.6, 1.20),
-                    }
+    #tablas COCOMO
+    tablas = tablas_COCOMO()
+    tabla_cocomo = tablas["tabla_cocomo"]
+    tabla_esfuerzo = tablas["tabla_esfuerzo"]
     coeficientes = tabla_esfuerzo[tipo_proyecto]
     ab, bb =coeficientes
     esfuerzo = round(ab * pow(ldcenmiles,bb),2)
     coeficientes = tabla_cocomo[tipo_proyecto]
     cb, db = coeficientes
     planeacion_cocomo = round(cb*pow(esfuerzo, db),2)
-
     diccionario_planeacion = {'planeacion' : planeacion,
                               'pfa' : PFA.puntos_funcion_ajustados,
                               'exp' : exp,
@@ -227,13 +245,57 @@ def CalcularPlaneacion(id):
                               'db' : db,
                               }
 
+    if not Planeacion.objects.filter(proyecto_id=id):
+
+        object_planeacion = Planeacion.objects.create(Planeacion_jones=planeacion, Planeacion_COCOMO=planeacion_cocomo,
+                                                 proyecto=proyecto)
+        object_planeacion.save()
+    else:
+        object_planeacion = Planeacion.objects.get(proyecto_id=id)
+        object_planeacion.Planeacion_jones = planeacion
+        object_planeacion.Planeacion_COCOMO = planeacion_cocomo
+        object_planeacion.proyecto = proyecto
+        object_planeacion.save()
 
     return diccionario_planeacion
 
-def Planeacion(request, id):
+def getEsfuerzo(request, id):
     if request.method == 'GET':
-        proyecto = get_object_or_404(Proyecto, pk=id)
-        planeacion = CalcularPlaneacion(id)
-        return render(request, 'planeacion.html', {'proyecto':proyecto,
-                                                   'planeacion' : planeacion,
-                                                   })
+        proyecto = get_object_or_404(Proyecto, pk = id)
+        esfuerzo = Calcular_Esfuerzo(id, proyecto)
+        return render(request, 'esfuerzo.html', {'proyecto' : proyecto,
+                                                 'esfuerzo': esfuerzo})
+
+def Calcular_Esfuerzo(id, proyec):
+    #Calculando el esfuerzo sustituyendo la formula de la planeación
+    proyecto = get_object_or_404(Proyecto, pk=id)
+    planeacion = Planeacion.objects.get(proyecto=proyecto)
+    esfuerzo_Jones = round( pow( planeacion.Planeacion_jones/3 , 3) )
+    tipo_proyecto = proyecto.tipo_proyecto
+    #Esfuerzo por COCOMO
+    kldc = KLDC.objects.get(proyecto=proyecto)
+    ldcenmiles = kldc.KLDC
+    tablas = tablas_COCOMO()
+    tabla_esfuerzo = tablas["tabla_esfuerzo"]
+    coeficientes = tabla_esfuerzo[tipo_proyecto]
+    ab, bb =coeficientes
+    esfuerzo_cocomo = round(ab * pow(ldcenmiles,bb),2)
+    diccionario_esfuerzo = {'esfuerzo_jones' : esfuerzo_Jones,
+                            'planeacion' : planeacion.Planeacion_jones,
+                            'kldc' : kldc,
+                            'ab' : ab,
+                            'bb' : bb,
+                            'esfuerzo_cocomo' : esfuerzo_cocomo,
+                            }
+    if not Esfuerzo.objects.filter(proyecto_id=id):
+        object_esfuerzo = Esfuerzo.objects.create(Esfuerzo_jones=esfuerzo_Jones,
+                                                  Esfuerzo_COCOMO=esfuerzo_cocomo,
+                                                  proyecto = proyecto)
+        object_esfuerzo.save()
+    else:
+        object_esfuerzo = Esfuerzo.objects.get(proyecto_id=id)
+        object_esfuerzo.Esfuerzo_jones=esfuerzo_Jones
+        object_esfuerzo.Esfuerzo_COCOMO=esfuerzo_cocomo
+        object_esfuerzo.save()
+
+    return diccionario_esfuerzo
